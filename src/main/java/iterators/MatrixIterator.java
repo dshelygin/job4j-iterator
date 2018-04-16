@@ -14,6 +14,7 @@ public class MatrixIterator implements Iterator {
     public MatrixIterator(final int[][] values) {
         this.values = values;
     }
+    @Override
     public boolean hasNext() {
         return (values.length > x) && (values[x].length > y);
     }
@@ -29,6 +30,7 @@ public class MatrixIterator implements Iterator {
         }
         return new int[] {resultX, resultY};
     }
+    @Override
     public Integer next() throws NoSuchElementException {
         if (hasNext()) {
             int value = values[x][y];
@@ -40,6 +42,7 @@ public class MatrixIterator implements Iterator {
             throw new NoSuchElementException();
         }
     }
+    @Override
     public void remove() throws UnsupportedOperationException  {
         throw new UnsupportedOperationException("remove");
     }

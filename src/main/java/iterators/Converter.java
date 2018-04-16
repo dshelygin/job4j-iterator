@@ -17,7 +17,7 @@ public class Converter {
                     curIterator = it.next();
                 }
             }
-
+            @Override
             public boolean hasNext() {
                 if (curIterator.hasNext()) {
                     return true;
@@ -31,6 +31,7 @@ public class Converter {
                 }
                 return false;
             }
+            @Override
             public Integer next() {
                 if (hasNext()) {
                     return curIterator.next();
@@ -38,6 +39,7 @@ public class Converter {
                     throw new NoSuchElementException();
                 }
             }
+            @Override
             public void remove() throws UnsupportedOperationException  {
                 throw new UnsupportedOperationException("remove");
             }

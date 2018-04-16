@@ -17,6 +17,7 @@ public class EvenNumbersIterator implements Iterator {
             x = getNextPosition();
         }
     }
+    @Override
     public boolean hasNext() {
         if (x >= 0) {
             return (values.length > x) && isEven(values[x]);
@@ -26,7 +27,6 @@ public class EvenNumbersIterator implements Iterator {
     }
     private int getNextPosition(){
         for (int i=x; i < values.length; i++) {
-//            if ((values[i] & 1) == 0) {
               if (isEven(values[i])) {
                   return i;
               }
@@ -37,6 +37,7 @@ public class EvenNumbersIterator implements Iterator {
     private Boolean isEven(int value) {
         return (value & 1) == 0;
     }
+    @Override
     public Integer next() throws NoSuchElementException {
         if (hasNext()) {
             int value = values[x++];
@@ -46,6 +47,7 @@ public class EvenNumbersIterator implements Iterator {
             throw new NoSuchElementException();
         }
     }
+    @Override
     public void remove() throws UnsupportedOperationException  {
         throw new UnsupportedOperationException("remove");
     }

@@ -16,6 +16,7 @@ public class PrimeIterator  implements Iterator {
             x = getNextPosition();
         }
     }
+    @Override
     public boolean hasNext() {
         if (x >= 0) {
             return (values.length > x) && isPrime(values[x]);
@@ -31,6 +32,7 @@ public class PrimeIterator  implements Iterator {
         }
         return -1;
     }
+    @Override
     public Integer next() throws NoSuchElementException {
         if (hasNext()) {
             int value = values[x++];
@@ -40,6 +42,7 @@ public class PrimeIterator  implements Iterator {
             throw new NoSuchElementException();
         }
     }
+    @Override
     public void remove() throws UnsupportedOperationException  {
         throw new UnsupportedOperationException("remove");
     }
