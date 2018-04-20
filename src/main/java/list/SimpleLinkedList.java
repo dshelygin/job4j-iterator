@@ -125,8 +125,27 @@ public class SimpleLinkedList<T>  implements Iterable<T>{
                 }
             }
 
-            public void remove() throws UnsupportedOperationException  {
-                throw new UnsupportedOperationException();
+            public void remove()   {
+                if (current != null) {
+                     if (current.getPrevious().getPrevious() != null) {
+                            current.getPrevious().getPrevious().setNext(current);
+                            current.setPrevious(current.getPrevious().getPrevious());
+                     } else {
+                         current.setPrevious(null);
+                         setHead(current);
+                     }
+
+                } else {
+                    Node newTail = getTail().getPrevious();
+                    if (newTail != null) {
+                        newTail.setNext(null);
+                        setTail(newTail);
+                    } else {
+                        setHead(null);
+                        setTail(null);
+                    }
+
+                }
             }
 
 

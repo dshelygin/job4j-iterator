@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
  * Created by dshelygin on 16.04.2018.
  */
 public class SimpleArray<T> implements Iterable<T> {
+
     private static final int DEFAULLT_SIZE = 10;
     private static final int INCREASE_SIZE = 10;
     private int size = 0;
@@ -20,15 +21,12 @@ public class SimpleArray<T> implements Iterable<T> {
         if ( size >= values.length) { grow(INCREASE_SIZE); }
         values[size++] = model;
     };
-
     public void set(int index, T model){
         values[index] = model;
     }
-
     public void  delete(int index) {
         values[index] = null;
     }
-
     public T get(int index) {
         return (T) values[index];
     }
@@ -49,7 +47,7 @@ public class SimpleArray<T> implements Iterable<T> {
                     }
                 }
 
-            public void remove() throws UnsupportedOperationException  {
+            public void remove()   {
                 int numMoved = size - pointer  ;
                 if (numMoved > 0)
                     System.arraycopy(values, pointer, values, pointer -1,
