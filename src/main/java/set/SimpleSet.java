@@ -21,7 +21,7 @@ public class SimpleSet<T> implements Iterable<T>{
         Iterator<T> it = values.iterator();
         while (it.hasNext()) {
             if (it.next().equals(value)) {
-                return;
+                return ;
             };
         }
         values.add(value);
