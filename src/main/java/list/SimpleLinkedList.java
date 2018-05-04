@@ -1,6 +1,8 @@
 package list;
 
 import com.sun.istack.internal.Nullable;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -9,10 +11,15 @@ import java.util.NoSuchElementException;
 /**
  * Created by dshelygin on 19.04.2018.
  */
+@ThreadSafe
 public class SimpleLinkedList<T>  implements Iterable<T>{
+    @GuardedBy("this")
     private Node<T> head = null;
+    @GuardedBy("this")
     private Node<T> tail = null;
+    @GuardedBy("this")
     private int modCounter = 0;
+    @GuardedBy("this")
     private int size = 0;
 
     public static class Node<T> {
@@ -55,30 +62,30 @@ public class SimpleLinkedList<T>  implements Iterable<T>{
    }
 
    @Nullable
-   public int getSize(){
+   public synchronized int getSize(){
         return size;
    }
 
    @Nullable
-   public Node getHead() {
+   public synchronized  Node getHead() {
         return head;
    }
 
-   void setHead(Node head) {
+   synchronized void  setHead(Node head) {
         this.head = head;
    }
 
    @Nullable
-   public Node getTail(){
+   public synchronized Node getTail(){
         return tail;
    }
 
-   void setTail(Node tail) {
+   synchronized void setTail(Node tail) {
        this.tail = tail;
    }
 
     @Nullable
-    public T get(int index){
+    public synchronized T get(int index){
             Node tempNode = head;
             while (tempNode != null) {
                 if (tempNode.getIndex() == index ) {
@@ -90,7 +97,7 @@ public class SimpleLinkedList<T>  implements Iterable<T>{
     }
 
     //добавляем в конец
-    public void add(T value) {
+    public synchronized void add(T value) {
         modCounter++;
         Node tempNode = new Node(value,tail,null,size++);
         if (tail != null) {
@@ -103,7 +110,7 @@ public class SimpleLinkedList<T>  implements Iterable<T>{
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public synchronized Iterator<T> iterator() {
         return new Iterator<T>() {
             private Node<T> current = head;
             private int expectedModCount = modCounter;
